@@ -9,6 +9,7 @@ from urllib2 import HTTPError
 from bs4 import BeautifulSoup
 
 kBaseUrl = "http://bairwmp.org/projects/archived-projects-2013-plan-update/folder_tabular_view?b_start:int=0&-C"
+kSecondPageUrl = "http://bairwmp.org/projects/archived-projects-2013-plan-update/folder_tabular_view?b_start:int=100&-C="
 kTableEntryClass = "contenttype-irwmpproject"
 kTableClassName = "listing"
 kTableHref = "href"
@@ -63,29 +64,81 @@ into a list that is returned to the caller.
 </tr>
 '''
 def getProjectUrls(bsObject):
+    listOfLinks = []
     table = bsObject.find('table', {'class': kTableClassName})
-    links = table.findAll(kHtmlLink)
-    for linkWrapper in links:
-        print linkWrapper.get(kTableHref)
-        
-'''
-<td>
-<span class="contenttype-irwmpproject">
-<img alt="Project" height="16" src="http://bairwmp.org/proj.gif" width="16"/>
-<a class="state-published" href="http://bairwmp.org/projects/archived-projects-2013-plan-update/mount-diablo-state-park-comprehensive-stock-pond" title="">text</a>
-</span>
-</td>
-
-def extractURL(string):
-    miniSoup = generateBeautifulSoupObject(string)
-    return miniSoup.findAll(class_ = kTableDataClass)
+    linkWrappers = table.findAll(kHtmlLink)
+    for eachWrapper in linkWrappers:
+        listOfLinks.append(eachWrapper.get(kTableHref))
+    return listOfLinks
 
 '''
+This routine takes in a list of 
+valid URLs. It then proceeds to 
+collect the needed data from the pages
+pointed to by the locators.
+'''
+def scrapeEachProjectPage(urlList):
+    for eachUrl in urlList:
+        html = fetchHTML(eachErl)
+        bSoupObject = generateBeautifulSoup(html)
+        extractDataFromProjectPage(bSoupObject)
+'''
+Helper routine that does the actual scraping.
+'''
+def extractDataFromProjectPage(bsObject):
+    #    |PART 1|
+    title = extractHeading(bsObject)
+    abstract = extractAbstract(bsObject)
+    deadline = extractDeadline(bsObject)
+    projectType = extractProjectType(bsObject)
+    projectTypeDescr = extractProjectTypeDescr(bsObject)
+    functionalAreas = extractFuncctionalAreas(bsObject)
 
+    #    |PART 2|
+    detailedDescr = getDetailedDescr(bsObject)
+    parentProject = getParentProject(bsObject)
+    relatedDocs = getRelatedDocs(bsObject)
+    applicableWaterBodies = getApplicableH20Bodies(bsObject)
+    projectNeed = getProjectNeed(bsObject)
+    impactsIfNotImpl = getImpactsIfNotImpl(bsObject);
+    benefits = getProjectBenefits(bsObject)
+
+    #   |PART 2.2|
+    reduceWaterSupply = reduceWaterSupply(bsOject)
+    disadvatagedCommunity = disadvantagedCommunity(bsObject)
+
+    '''
+    # |Climate Change|
+    adaptationToClimateChange = getAdaptationToClimateChange(bsObject)
+    reducingGreenhouseGases = getMitigation(bsObject)
+    impacts = getClimateChangeImpacts(bsObject)
+    '''
+    
+    # |COSTS|
+    costVector = getCostInfo(bsObject)
+    stateWidePriorities = getStateWidePriorities(bsObject)
+    califWPRMS = getCaliWPRMS(bsObject)
+    eligibilityCriteria = getEligibilityCriteria(bsObject)
+    prop84 = getMultipleBenefits(bsObject)
+    prop1E = getStormWaterFloodManagement(bsObject)
+    benefitsAndImpacts = getExpBenefitsAndImpacts(bsObject)
+
+    # |PROJECT TEAM|
+    contacts = getContacts(bsObject)
+    investigators = getInvestigators(bsObject)
+    sponsorAgency = getSponsorAgency(bsObject)
+    participants = getParticipatingOrganizations(bsObject)
+
+    # |Files|
+    projectBenefitsFile = getProjectBenefitsFile(bsObject)
+    
 def main():
-    html = fetchHTML(kBaseUrl)
-    bsObject = generateBeautifulSoupObject(html)
-    getProjectUrls(bsObject)
+   firstPageHtml = fetchHTML(kBaseUrl)
+   secondPageHtml = fetchHTML(kSecondPageUrl)
+   firstPageBsObject = generateBeautifulSoupObject(firstPageHtml)
+   secondPageBsObject = generateBeautifulSoupObject(secondPageHtml)
+   urlList = getProjectUrls(firstPageBsObject) + getProjectUrls(secondPageBsObject)
+   scrapeEachProjectPage(urlList)
 
 if __name__ == "__main__":
     main()
