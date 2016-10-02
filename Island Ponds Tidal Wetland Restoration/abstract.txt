@@ -1,1 +1,3 @@
-Encoding scheme error. Need to find way around this
+
+Abstract:
+The Santa Clara Valley Water District and the U.S. Fish and Wildlife Service Don Edwards San Francisco Bay National Wildlife Refuge partnered to restore tidal action to former salt evaporator Ponds A19, A20 and A21 (the Island Ponds) in March 2006.  The Island Ponds, which cover 475 acres,  are located at the southern end of the San Francisco Bay Estuary, near the mouth of Coyote Creek.  Levees surrounding the ponds were breached on the Coyote Creek side, and passive restoration processes are expected to bring a mix of salt marsh and brackish marsh vegetation to the ponds over the next several years.  Lessons learned through this project can be applied to planning of both the South Bay Salt Pond Restoration Project's long-term restoration plan and the South San Francisco Bay Shoreline Study.

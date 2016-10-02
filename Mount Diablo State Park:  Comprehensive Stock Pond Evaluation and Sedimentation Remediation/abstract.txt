@@ -1,1 +1,3 @@
-Encoding scheme error. Need to find way around this
+
+Abstract:
+This project will evaluate between 15 and 20 stock ponds within Mount Diablo State Park (MDSP).  These ponds were constructed for ranching operations prior to park acquisition, and are experiencing various levels of disrepair.  The project will identify and characterize each pond, it's condition, sustainability, sedimentation source, potential for dam and pond failure as well as habitat value to support species of special concern such as California red-legged frogs.  Specific treatment alternatives will be developed for each pond, and a prioritization of treatments will be developed based on various criteria.  As funding allows, ponds will either be repaired and retained, or removed to restore hydrologic function.

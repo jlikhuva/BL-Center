@@ -1,1 +1,3 @@
-Encoding scheme error. Need to find way around this
+
+Abstract:
+Project description:  Sonoma Ecology Center will develop a road and trail plan for public lands managed by California Department of State Parks and California Department of Developmental Services in Sonoma Creek Watershed.  SEC will (1) coordinate, attend, and document interagency meetings; (2) conduct public outreach; (3) develop coordinated trail and road management plan for each park area; (4) write final report that incorporates agency, public, and existing technical information and calendar as well as strategy for managing trails and roads in four public lands areas in Sonoma Valley: Annadel State Park, Jack London State Historic Park, Sugarloaf Ridge State Park, and Sonoma Developmental Center.

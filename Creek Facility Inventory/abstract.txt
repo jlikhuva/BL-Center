@@ -1,1 +1,3 @@
-Encoding scheme error. Need to find way around this
+
+Abstract:
+Inventory in GIS of all creeks and their facilities - such as levees, concrete-lined channels, natural channels, trails, riparian vegetation, etc.  Provides a foundation for flood protection assessment and ecosystem health and restoration potential for all natural waterways.  This project ties directly with the Statewide (DWR) & National (FEMA/ Corps of Engineers) Levee Inventory, which will establish ownership and maintenance responsibility for flood protection facilities. 

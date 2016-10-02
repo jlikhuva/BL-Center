@@ -1,1 +1,3 @@
-Encoding scheme error. Need to find way around this
+
+Abstract:
+EcoWise Certified distinguishes Structural Pest Control Operators that demonstrate through testing and field audits that they offer Integrated Pest Management services that meet the EcoWise Standard.  Bay Area municipalities are required to use IPM under their stormwater program permits; however, finding trained, competent IPM professionals is difficult.  EcoWise is a third party certification program.  It also offers training to PCOs to ensure that they practice IPM properly to minimize pesticide pollution.

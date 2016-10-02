@@ -6,6 +6,7 @@ stores them.
 '''
 import sys
 import os
+import io
 from urllib2 import urlopen
 from urllib2 import HTTPError
 from bs4 import BeautifulSoup
@@ -240,7 +241,7 @@ def createThisProjectsDirectory(dirName):
             
 def storeThisProjectsAbstract(abstractText, where):
     path = generatePathFromCur(where)
-    with open(os.path.join(path, kAbstractName), "w") as abstractFile:
+    with io.open(os.path.join(path, kAbstractName), "w", encoding='utf-8') as abstractFile:
         try:
             abstractFile.write(abstractText)
         except:
@@ -249,7 +250,7 @@ def storeThisProjectsAbstract(abstractText, where):
         
 def storeThisProjectsDescription(descriptionText, where):
     path = generatePathFromCur(where)
-    with open(os.path.join(path, kProjectTypeDescr), "w") as descriptionFile:
+    with io.open(os.path.join(path, kProjectTypeDescr), "w", encoding='utf-8') as descriptionFile:
         try:
             descriptionFile.write(descriptionText)
         except:
@@ -258,7 +259,7 @@ def storeThisProjectsDescription(descriptionText, where):
         
 def storeThisProjectsFunctionalAreas(funcAreasText, where):
     path = generatePathFromCur(where)
-    with open(os.path.join(path, kFunctionalAreas), "w") as funcAreasFile:
+    with io.open(os.path.join(path, kFunctionalAreas), "w", encoding='utf-8') as funcAreasFile:
         try:
             funcAreasFile.write(funcAreasText)
         except:
@@ -267,7 +268,7 @@ def storeThisProjectsFunctionalAreas(funcAreasText, where):
         
 def storeThisProjectsSponsorAgencies(sponsorAgenciesText, where):
     path = generatePathFromCur(where)
-    with open(os.path.join(path, kSponsorAgencies), "w") as sponsorAgenciesFile:
+    with io.open(os.path.join(path, kSponsorAgencies), "w", encoding='utf-8') as sponsorAgenciesFile:
         try:
             sponsorAgenciesFile.write(sponsorAgenciesText)
         except:
@@ -276,7 +277,7 @@ def storeThisProjectsSponsorAgencies(sponsorAgenciesText, where):
         
 def storeThisProjectsParticipatingOrgs(participantsText, where):
     path = generatePathFromCur(where)
-    with open(os.path.join(path, kParticipants), "w") as participantsFile:
+    with io.open(os.path.join(path, kParticipants), "w", encoding='utf-8') as participantsFile:
         try:
             participantsFile.write(participantsText)
         except:

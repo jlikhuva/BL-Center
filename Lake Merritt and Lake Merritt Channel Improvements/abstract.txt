@@ -1,1 +1,3 @@
-Encoding scheme error. Need to find way around this
+
+Abstract:
+The City of Oakland is pursuing a range of capital improvements at Lake Merritt and the Lake Merritt Channel that will have significant water quality, habitat, and recreational values.  These proposed improvements include the removal of culverts and fill materials at 12th and 10th Street, the creation of a by-pass structure at 7th Street, and the implementation of water quality technologies at the Lake.
