@@ -92,8 +92,8 @@ def scrapeEachProjectPage(urlList):
     for eachUrl in urlList:
         html = fetchHTML(eachUrl)
         bSoupObject = generateBeautifulSoupObject(html)
-        extractDataFromProjectPage(bSoupObject)
-        break;
+        extractAndStoreDataFromProjectPage(bSoupObject)
+        
 
 '''
 This dictionary provides a way to compactly locate
@@ -115,7 +115,7 @@ dataPositions = {
 '''
 Helper routine that does the actual scraping.
 '''
-def extractDataFromProjectPage(bsObject):
+def extractAndStoreDataFromProjectPage(bsObject):
     #    |PART 1|
     title = extractHeading(bsObject)
     allText = extractAllText(bsObject)
@@ -230,28 +230,43 @@ def createThisProjectsDirectory(dirName):
 def storeThisProjectsAbstract(abstractText, where):
     path = generatePathFromCur(where)
     with open(os.path.join(path, kAbstractName), "w") as abstractFile:
-        abstractFile.write(abstractText)
-
+        try:
+            abstractFile.write(abstractText)
+        except:
+            pass # Ignore errors arising from encoding schemes
+        
 def storeThisProjectsDescription(descriptionText, where):
     path = generatePathFromCur(where)
     with open(os.path.join(path, kProjectTypeDescr), "w") as descriptionFile:
-        descriptionFile.write(descriptionText)
+        try:
+            descriptionFile.write(descriptionText)
+        except:
+            pass
         
 def storeThisProjectsFunctionalAreas(funcAreasText, where):
     path = generatePathFromCur(where)
     with open(os.path.join(path, kFunctionalAreas), "w") as funcAreasFile:
-        funcAreasFile.write(funcAreasText)
+        try:
+            funcAreasFile.write(funcAreasText)
+        except:
+            pass
         
 def storeThisProjectsSponsorAgencies(sponsorAgenciesText, where):
     path = generatePathFromCur(where)
     with open(os.path.join(path, kSponsorAgencies), "w") as sponsorAgenciesFile:
-        sponsorAgenciesFile.write(sponsorAgenciesText)
+        try:
+            sponsorAgenciesFile.write(sponsorAgenciesText)
+        except:
+            pass
         
 def storeThisProjectsParticipatingOrgs(participantsText, where):
     path = generatePathFromCur(where)
     with open(os.path.join(path, kParticipants), "w") as participantsFile:
-        participantsFile.write(participantsText)
-    
+        try:
+            participantsFile.write(participantsText)
+        except:
+            pass
+         
 def main():
    firstPageHtml = fetchHTML(kBaseUrl)
    secondPageHtml = fetchHTML(kSecondPageUrl)

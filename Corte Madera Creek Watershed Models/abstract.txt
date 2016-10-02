@@ -1,0 +1,3 @@
+
+Abstract:
+Funding for three phases of modeling is requested. First we propose to develop a watershed model (HMS) that relates measured rainfall to flow in Corte Madera Creek and its tributaries. Second, we would develop a steady-flow hydraulic model (HEC-RAS) of the creek. Thirdly, we would enhance the steady-flow model to include unsteady flow and add a water quality (initially temperature) model.
