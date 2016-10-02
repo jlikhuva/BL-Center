@@ -1,7 +1,9 @@
-# module main.
-# This serves as the entry point to
-# this project.
-
+'''
+Collects data from 121 archived projects carried
+out by the BayArea Integrated Water Management plan.
+The module also organizes the data into groups and
+stores them.
+'''
 import sys
 import csv
 from urllib2 import urlopen
@@ -79,21 +81,73 @@ pointed to by the locators.
 '''
 def scrapeEachProjectPage(urlList):
     for eachUrl in urlList:
-        html = fetchHTML(eachErl)
-        bSoupObject = generateBeautifulSoup(html)
+        html = fetchHTML(eachUrl)
+        bSoupObject = generateBeautifulSoupObject(html)
         extractDataFromProjectPage(bSoupObject)
+        break;
+
+'''
+This dictionary provides a way to compactly locate
+the position of the data we want to extract from the
+list of data objects returned by findAll.
+'''
+dataPositions = {
+    "kAbstractPos" : 1,
+    "kProjectDescr" : 9,
+    "kFuncAreasPos" : 10,
+    "kElemOfLarger": 12,
+    "kReduceWaterSupply": 19,
+    "kAdjToDisadvComm" : 20,
+    "kDisadvCommPartic" : 21,
+    "kSponsorAgency" : 41,
+    "kParticipatingOrgs" : 42
+}
+
 '''
 Helper routine that does the actual scraping.
 '''
 def extractDataFromProjectPage(bsObject):
     #    |PART 1|
     title = extractHeading(bsObject)
-    abstract = extractAbstract(bsObject)
-    deadline = extractDeadline(bsObject)
-    projectType = extractProjectType(bsObject)
-    projectTypeDescr = extractProjectTypeDescr(bsObject)
-    functionalAreas = extractFuncctionalAreas(bsObject)
+    allText = extractAllText(bsObject)
 
+    '''
+    Since we have all the data that we want, we can go ahead and extract
+    the pieces that we're interested in. To know exactly where our pieces
+    of interest lie, we manually examine using the commented out code below.
+    This works only b/c the data we're dealing with is small enough. With a 
+    larger data set, it'd be better to examine the data to find patterns that 
+    can aid us in extracting data. But, at the moment, and with our current trove,
+    this strategy works.
+    '''
+    '''
+    f = open(title+".txt", "w")
+    i = 0
+    for each in allText:
+        if each:
+            try:
+                f.write(str(i))
+                f.write(each)
+            except:
+                f.write("Error")
+            i+=1
+    f.close()
+    '''
+    abstract = allText[dataPositions["kAbstractPos"]]
+    projectTypeDescr = allText[dataPositions["kProjectDescr"]]
+    functionalAreas = allText[dataPositions["kFuncAreasPos"]]
+    elemOfLarger = allText[dataPositions["kElemOfLarger"]]
+    sponsorAgency = allText[dataPositions["kSponsorAgency"]]
+    participatingOrgs = allText[dataPositions["kParticipatingOrgs"]]
+    adjToDisadvComm = allText[dataPositions["kAdjToDisadvComm"]]
+    disadvCommParticipation = allText[dataPositions["kDisadvCommPartic"]]
+    reduceWaterSupply = allText[dataPositions["kReduceWaterSupply"]]
+
+    # The data set that we have has a LOT of 'noise', that is, a lot
+    # of would be useful data that is missing. At a point in time when
+    # we are dealing with documents in which that data is present, the routines
+    # below are to be implemented to collect that data.
+    '''
     #    |PART 2|
     detailedDescr = getDetailedDescr(bsObject)
     parentProject = getParentProject(bsObject)
@@ -108,12 +162,12 @@ def extractDataFromProjectPage(bsObject):
     disadvatagedCommunity = disadvantagedCommunity(bsObject)
 
     '''
-    # |Climate Change|
-    adaptationToClimateChange = getAdaptationToClimateChange(bsObject)
+    '''|Climate Change|'''
+    '''adaptationToClimateChange = getAdaptationToClimateChange(bsObject)
     reducingGreenhouseGases = getMitigation(bsObject)
     impacts = getClimateChangeImpacts(bsObject)
     '''
-    
+    '''
     # |COSTS|
     costVector = getCostInfo(bsObject)
     stateWidePriorities = getStateWidePriorities(bsObject)
@@ -131,6 +185,21 @@ def extractDataFromProjectPage(bsObject):
 
     # |Files|
     projectBenefitsFile = getProjectBenefitsFile(bsObject)
+    '''
+kProjectHeadingClass = "documentFirstHeading"
+kProjectHeadingSizeDesc = "h1"
+def extractHeading(bsobj):
+    heading = bsobj.findAll(kProjectHeadingSizeDesc, {"class" : kProjectHeadingClass})
+    return heading[0].get_text() # We expect the list returned by findAll to one entry.
+
+kFieldClass = "field"
+def extractAllText(bsObject):
+    textList = []
+    fieldWrapper = bsObject.findAll("div", {"class" : kFieldClass})
+    for paragraph in fieldWrapper:
+        textList.append(paragraph.get_text())
+    return textList
+
     
 def main():
    firstPageHtml = fetchHTML(kBaseUrl)
