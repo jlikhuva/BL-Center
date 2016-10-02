@@ -19,6 +19,7 @@ kTableHref = "href"
 kHtmlLink = "a"
 
 # Constants used when storing data
+kProjectNames = "projectNames.txt"
 kAbstractName = "abstract.txt"
 kProjectTypeDescr = "projectTypeDescription.txt"
 kFunctionalAreas = "functionalAreas.txt"
@@ -152,6 +153,7 @@ def extractAndStoreDataFromProjectPage(bsObject):
     disadvCommParticipation = allText[dataPositions["kDisadvCommPartic"]]
     reduceWaterSupply = allText[dataPositions["kReduceWaterSupply"]]
 
+    addProjectNameToProjectList(title)
     createThisProjectsDirectory(title)
     storeThisProjectsAbstract(abstract, title)
     storeThisProjectsDescription(projectTypeDescr, title)
@@ -216,6 +218,15 @@ def extractAllText(bsObject):
         textList.append(paragraph.get_text())
     return textList
 
+def addProjectNameToProjectList(title):
+    try:
+        f = open(kProjectNames, "a")
+        f.write(title)
+        f.write("\n")
+    except:
+        pass #ignoring erros for now
+    f.close()
+
 def generatePathFromCur(dirName):
     return "./"+dirName
 
@@ -234,6 +245,7 @@ def storeThisProjectsAbstract(abstractText, where):
             abstractFile.write(abstractText)
         except:
             pass # Ignore errors arising from encoding schemes
+        abstractFile.close()
         
 def storeThisProjectsDescription(descriptionText, where):
     path = generatePathFromCur(where)
@@ -242,6 +254,7 @@ def storeThisProjectsDescription(descriptionText, where):
             descriptionFile.write(descriptionText)
         except:
             pass
+        descriptionFile.close()
         
 def storeThisProjectsFunctionalAreas(funcAreasText, where):
     path = generatePathFromCur(where)
@@ -250,6 +263,7 @@ def storeThisProjectsFunctionalAreas(funcAreasText, where):
             funcAreasFile.write(funcAreasText)
         except:
             pass
+        funcAreasFile.close()
         
 def storeThisProjectsSponsorAgencies(sponsorAgenciesText, where):
     path = generatePathFromCur(where)
@@ -258,6 +272,7 @@ def storeThisProjectsSponsorAgencies(sponsorAgenciesText, where):
             sponsorAgenciesFile.write(sponsorAgenciesText)
         except:
             pass
+        sponsorAgenciesFile.close()
         
 def storeThisProjectsParticipatingOrgs(participantsText, where):
     path = generatePathFromCur(where)
@@ -266,6 +281,7 @@ def storeThisProjectsParticipatingOrgs(participantsText, where):
             participantsFile.write(participantsText)
         except:
             pass
+        participantsFile.close()
          
 def main():
    firstPageHtml = fetchHTML(kBaseUrl)
