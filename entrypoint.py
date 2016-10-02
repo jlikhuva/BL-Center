@@ -5,17 +5,26 @@ The module also organizes the data into groups and
 stores them.
 '''
 import sys
-import csv
+import os
 from urllib2 import urlopen
 from urllib2 import HTTPError
 from bs4 import BeautifulSoup
 
+# Constants used when collecting links.
 kBaseUrl = "http://bairwmp.org/projects/archived-projects-2013-plan-update/folder_tabular_view?b_start:int=0&-C"
 kSecondPageUrl = "http://bairwmp.org/projects/archived-projects-2013-plan-update/folder_tabular_view?b_start:int=100&-C="
 kTableEntryClass = "contenttype-irwmpproject"
 kTableClassName = "listing"
 kTableHref = "href"
 kHtmlLink = "a"
+
+# Constants used when storing data
+kAbstractName = "abstract.txt"
+kProjectTypeDescr = "projectTypeDescription.txt"
+kFunctionalAreas = "functionalAreas.txt"
+kSponsorAgencies = "sponsorAgencies.txt"
+kParticipants = "participatingOrganizations.txt"
+
 
 '''
 Fetches the html text stored at url. url
@@ -92,7 +101,7 @@ the position of the data we want to extract from the
 list of data objects returned by findAll.
 '''
 dataPositions = {
-    "kAbstractPos" : 1,
+    "kAbstractPos" : 0,
     "kProjectDescr" : 9,
     "kFuncAreasPos" : 10,
     "kElemOfLarger": 12,
@@ -143,6 +152,13 @@ def extractDataFromProjectPage(bsObject):
     disadvCommParticipation = allText[dataPositions["kDisadvCommPartic"]]
     reduceWaterSupply = allText[dataPositions["kReduceWaterSupply"]]
 
+    createThisProjectsDirectory(title)
+    storeThisProjectsAbstract(abstract, title)
+    storeThisProjectsDescription(projectTypeDescr, title)
+    storeThisProjectsFunctionalAreas(functionalAreas, title)
+    storeThisProjectsSponsorAgencies(sponsorAgency, title)
+    storeThisProjectsParticipatingOrgs(participatingOrgs, title)
+    
     # The data set that we have has a LOT of 'noise', that is, a lot
     # of would be useful data that is missing. At a point in time when
     # we are dealing with documents in which that data is present, the routines
@@ -200,6 +216,41 @@ def extractAllText(bsObject):
         textList.append(paragraph.get_text())
     return textList
 
+def generatePathFromCur(dirName):
+    return "./"+dirName
+
+def createThisProjectsDirectory(dirName):
+    path = generatePathFromCur(dirName)
+    if not os.path.exists(path):
+        try:
+            os.makedirs(path)
+        except OSError as e:
+            sys.exit("Failed to create directory: " + dirName)
+            
+def storeThisProjectsAbstract(abstractText, where):
+    path = generatePathFromCur(where)
+    with open(os.path.join(path, kAbstractName), "w") as abstractFile:
+        abstractFile.write(abstractText)
+
+def storeThisProjectsDescription(descriptionText, where):
+    path = generatePathFromCur(where)
+    with open(os.path.join(path, kProjectTypeDescr), "w") as descriptionFile:
+        descriptionFile.write(descriptionText)
+        
+def storeThisProjectsFunctionalAreas(funcAreasText, where):
+    path = generatePathFromCur(where)
+    with open(os.path.join(path, kFunctionalAreas), "w") as funcAreasFile:
+        funcAreasFile.write(funcAreasText)
+        
+def storeThisProjectsSponsorAgencies(sponsorAgenciesText, where):
+    path = generatePathFromCur(where)
+    with open(os.path.join(path, kSponsorAgencies), "w") as sponsorAgenciesFile:
+        sponsorAgenciesFile.write(sponsorAgenciesText)
+        
+def storeThisProjectsParticipatingOrgs(participantsText, where):
+    path = generatePathFromCur(where)
+    with open(os.path.join(path, kParticipants), "w") as participantsFile:
+        participantsFile.write(participantsText)
     
 def main():
    firstPageHtml = fetchHTML(kBaseUrl)
