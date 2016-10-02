@@ -244,7 +244,7 @@ def storeThisProjectsAbstract(abstractText, where):
         try:
             abstractFile.write(abstractText)
         except:
-            pass # Ignore errors arising from encoding schemes
+            abstractFile.write("Encoding scheme error. Need to find way around this") # Ignore errors arising from encoding schemes
         abstractFile.close()
         
 def storeThisProjectsDescription(descriptionText, where):
