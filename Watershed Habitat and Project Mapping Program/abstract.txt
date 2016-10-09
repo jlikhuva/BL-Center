@@ -1,3 +1,0 @@
-
-Abstract:
-This project would provide fundamental support to all watershed and habitat planning and assessment efforts in the SF Bay Area by producing and mainatining authoritative maps of all channels, water impoundments, riparian habitats, wetlands and related projects by coordinated implementation of Regional, State, and Federal mapping protocols through existing public and technical advisory committees.
