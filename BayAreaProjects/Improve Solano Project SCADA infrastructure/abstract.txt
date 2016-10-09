@@ -1,0 +1,3 @@
+
+Abstract:
+The Solano County Water Agency (SCWA) is responsible for O,M,&R of Solano Project facilities, owned by USBR. The Putah South Canal has 13 operated control check structures along its 30 mile length. Operators ride up and down the system throughout a work day making adjustments manually. This project is to install contiguous dedicated power and data lines from the top end of the Solano Project system to the bottom. This would allow monitoring of the entire system simultaneously from a central location and could allow automated remote control.

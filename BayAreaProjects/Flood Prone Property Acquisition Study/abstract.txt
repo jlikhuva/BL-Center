@@ -1,0 +1,3 @@
+
+Abstract:
+This project would identify those properties that are built directly in the path of a historic creeks and are experiencing severe flooding and determine the feasibility of either a direct purchase from willing sellers by the city or placing a right of first refusal when the property becomes available.

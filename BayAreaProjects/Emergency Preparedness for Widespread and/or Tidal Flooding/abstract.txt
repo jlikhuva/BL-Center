@@ -1,0 +1,3 @@
+
+Abstract:
+This project would provide for coordination of emergency response among multiple agencies in the event of widespread valley and/or tidal flooding. Planning would follow FEMA’s Multi-Hazard Mitigation Planning guidance (Disaster Mitigation Act of 2000) and guidance from the state Office of Emergency Services and would incorporate lessons learned from the response to Hurricane Katrina, as those lessons are documented in the results of forthcoming investigations. The project would include developing mutual aid agreements between agencies and web-accessible directories of transferable services. A regional Flood Hazard Mitigation Plan would be developed to fold into the existing ABAG Multi-Hazard Regional Plan.

@@ -1,0 +1,3 @@
+
+Abstract:
+Install or repair existing rain gages; install creek flow monitors; provide a method to record gathered information.
